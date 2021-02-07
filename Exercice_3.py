@@ -32,6 +32,10 @@ def clic(event):
 
 def effacer():
     if nb_croix>0 or nb_cercle>0 or nb_carre>0:
+        canvas.delete("all")
+        canvas.create_line((167, 0), (167, 500), fill="white")
+        canvas.create_line((334, 0), (334, 500), fill="white")
+    else:
         pass
 
 racine = tk.Tk()
@@ -39,12 +43,11 @@ racine = tk.Tk()
 canvas = tk.Canvas(racine, width=500, height=500, bg="black")
 bouton = tk.Button(racine, text="Redémarrer", command=effacer)
 
+canvas.create_line((167, 0), (167, 500), fill="white")
+canvas.create_line((334, 0), (334, 500), fill="white")
+
 canvas.grid(column=0, row=0)
 bouton.grid(column=0, row=1)
-
-ligne_gauche = canvas.create_line((167, 0), (167, 500), fill="white")
-ligne_droite = canvas.create_line((334, 0), (334, 500), fill="white")
-
 racine.bind("<Button-1>", clic)
 
 racine.mainloop()
