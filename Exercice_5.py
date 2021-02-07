@@ -8,3 +8,44 @@
 #Si l’utilisateur clique sur le bouton “Recommencer”, alors les 2 lignes verticales retournent à leur position initiale.
 
 #########################################################
+
+import tkinter as tk
+
+
+WIDTH = 600
+HEIGHT = 600
+
+
+def clic(event):
+    if event.x < 200:
+        canvas.move(ligne_gauche, -10, 0)
+        canvas.move(ligne_droite, -10, 0)
+    elif event.x > 400:
+        canvas.move(ligne_gauche, 10, 0)
+        canvas.move(ligne_droite, 10, 0)
+    else:
+        canvas.move(ligne_gauche, 10, 0)
+        canvas.move(ligne_droite, -10, 0)
+        
+
+def recommencer():
+    canvas.delete("all")
+    canvas.create_line((WIDTH/3, 0), (WIDTH/3, HEIGHT), fill="red", width=5)
+    canvas.create_line((2*WIDTH/3, 0), (2*WIDTH/3, HEIGHT), fill="yellow", width=5)
+    #faire appel à la fonction clic
+
+
+racine = tk.Tk()
+
+canvas = tk.Canvas(racine, width=WIDTH, height=HEIGHT, bg="black")
+bouton = tk.Button(racine, text="Recommencer", command=recommencer)
+
+canvas.grid(column=1, row=0)
+bouton.grid(column=0, row=0)
+
+ligne_gauche = canvas.create_line((WIDTH/3, 0), (WIDTH/3, HEIGHT), fill="red", width=5)
+ligne_droite = canvas.create_line((2*WIDTH/3, 0), (2*WIDTH/3, HEIGHT), fill="yellow", width=5)
+
+canvas.bind("<Button-1>", clic)
+
+racine.mainloop()
