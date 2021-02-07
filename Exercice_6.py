@@ -10,3 +10,36 @@
 #Si l’utilisateur clique sur le bouton “Annuler” alors le cercle reprend la couleur qu’il avait avant le dernier changement de couleur. Il doit être possible d’annuler tous les changements de couleur jusqu’au début.
 
 #########################################################
+
+import tkinter as tk
+
+WIDTH = 500
+HEIGHT = 500
+COTE = 50
+touche = 0
+
+def clic(event):
+    global touche
+    touche += 1
+    if event.x < COTE and event.y < COTE and touche == 1:
+        canvas.delete_oval((200,200), (300,300), fill="black")
+        canvas.create_oval((200,200), (300,300), fill="blue")
+
+
+racine = tk.Tk()
+
+canvas = tk.Canvas(racine, width=WIDTH, height=HEIGHT, bg="white")
+bouton = tk.Button(racine, text="Annuler")
+
+canvas.grid(column=1, row=0)
+bouton.grid(column=0, row=0)
+
+carre_vert = canvas.create_rectangle((COTE, 0), (0,COTE), fill="green")
+carre_jaune = canvas.create_rectangle((COTE, 0), (0,COTE), fill="yellow")
+carre_bleu = canvas.create_rectangle((COTE, 0), (0,COTE), fill="blue")
+cercle_noir = canvas.create_oval((200,200), (300,300), fill="black")
+
+canvas.bind("<Button-1>", clic)
+
+
+racine.mainloop()
