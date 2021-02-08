@@ -11,7 +11,7 @@
 
 #########################################################
 
-import tkinter as tk
+"""import tkinter as tk
 
 WIDTH = 500
 HEIGHT = 500
@@ -22,8 +22,17 @@ def clic(event):
     global touche
     touche += 1
     if event.x < COTE and event.y < COTE and touche == 1:
-        canvas.delete_oval((200,200), (300,300), fill="black")
+        canvas.delete((200,200), (300,300))
+        canvas.delete(carre_bleu)
         canvas.create_oval((200,200), (300,300), fill="blue")
+    elif event.x < COTE and event.y < COTE and touche == 2:
+        canvas.delete((200,200), (300,300))
+        canvas.delete(carre_jaune)
+        canvas.create_oval((200,200), (300,300), fill="yellow")
+    elif event.x < COTE and event.y < COTE and touche == 3:
+        canvas.delete((200,200), (300,300))
+        canvas.delete(carre_vert)
+        canvas.create_oval((200,200), (300,300), fill="green")
 
 
 racine = tk.Tk()
@@ -41,5 +50,28 @@ cercle_noir = canvas.create_oval((200,200), (300,300), fill="black")
 
 canvas.bind("<Button-1>", clic)
 
+
+racine.mainloop()"""
+
+import tkinter as tk
+
+WIDTH = 500
+HEIGHT = 500
+COTE = 50
+touche = 0
+
+
+racine = tk.Tk()
+
+canvas = tk.Canvas(racine, width=WIDTH, height=HEIGHT, bg="white")
+bouton = tk.Button(racine, text="Annuler")
+
+canvas.grid(column=1, row=0)
+bouton.grid(column=0, row=0)
+
+carre_vert = canvas.create_rectangle((COTE, 0), (0,COTE), fill="green")
+carre_jaune = canvas.create_rectangle((COTE, 0), (COTE*2,COTE), fill="yellow")
+carre_bleu = canvas.create_rectangle((COTE, 0), (0,COTE), fill="blue")
+cercle_noir = canvas.create_oval((200,200), (300,300), fill="black")
 
 racine.mainloop()
