@@ -32,7 +32,7 @@ def recommencer():
     canvas.delete("all")
     canvas.create_line((WIDTH/3, 0), (WIDTH/3, HEIGHT), fill="red", width=5)
     canvas.create_line((2*WIDTH/3, 0), (2*WIDTH/3, HEIGHT), fill="yellow", width=5)
-    #faire appel à la fonction clic
+    #clic(event)
 
 
 racine = tk.Tk()
