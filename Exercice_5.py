@@ -9,6 +9,45 @@
 
 #########################################################
 
+"""import tkinter as tk
+
+COTE = 600
+nombre = True
+def clic(event):
+    if nombre not False
+        if event.x < COTE//3:
+            canvas.move(ligne_gauche, -10, 0)
+            canvas.move(ligne_droite, -10, 0)
+        elif event.x > 2*COTE//3:
+            canvas.move(ligne_gauche, +10, 0)
+            canvas.move(ligne_droite, +10, 0)
+        else:
+            canvas.move(ligne_gauche, +10, 0)
+            canvas.move(ligne_droite, -10, 0)
+
+
+def recommencer():
+    canvas.delete("all")
+    ligne_gauche = canvas.create_line((COTE//3, 0), (COTE//3, COTE), fill="red", width=3)
+    ligne_droite = canvas.create_line((2*COTE//3, 0), (2*COTE//3, COTE), fill="blue", width=3)
+    nombre = 1
+
+racine = tk.Tk()
+
+canvas = tk.Canvas(racine, width= COTE, height= COTE, bg="black")
+bouton = tk.Button(racine, text= "Recommencer", command= recommencer)
+
+ligne_gauche = canvas.create_line((COTE//3, 0), (COTE//3, COTE), fill="red", width=3)
+ligne_droite = canvas.create_line((2*COTE//3, 0), (2*COTE//3, COTE), fill="blue", width=3)
+canvas.grid()
+bouton.grid(row=1)
+
+canvas.bind("<Button-1>", clic)
+
+
+racine.mainloop()"""
+
+
 import tkinter as tk
 
 
