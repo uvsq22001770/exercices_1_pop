@@ -13,36 +13,43 @@
 
 import tkinter as tk
 
-coord1 = 225
-coord2 = 275
-cote = coord2 - coord1
+cote = 50
+pause = False
 
-def clic(event):
-    global coord1, coord2, cote
-    if event.x > coord1 and event.x < coord2 and event.y > coord1 and event.y < coord2 and cote >= 20:
-        coord1 += 5
-        coord2 -= 5
-        canvas.delete("all")
-        canvas.create_rectangle((coord1, coord1), (coord2, coord2), fill="red")
-    elif (event.x < coord1 or event.x > coord2 or event.y < coord1 or event.y > coord2) and cote <= 100:
-        coord1 -= 5
-        coord2 += 5
-        canvas.delete("all")
-        canvas.create_rectangle((coord1, coord1), (coord2, coord2), fill="red")
+def bouton_pause():
+    global pause
+    if not pause:
+        bouton.config(text="Restart")
+        pause = True
+    else:
+        bouton.config(text="Pause")
+        pause = False
 
-def pause():
-    bouton.configure(text="Restart")
+def est_dans_carre(x, y):
+    """La fonction retourne True si le point de coordonnées (x,y) est dans le carré et False sinon"""
+    inf = 250-cote//2
+    sup = 250+cote//2
+    return inf <= x <= sup and inf <= y <= sup
+
+def change_taille(event):
+    global cote
+    if not pause:
+        if est_dans_carre(event.x, event.y) and cote >= 20:
+            cote -= 10
+            canvas.coords(carre, 250-cote//2, 250-cote//2,250+cote//2, 250+cote//2)
+        elif not est_dans_carre(event.x, event.y) and cote <= 100:
+            cote += 10
+            canvas.coords(carre, 250-cote//2, 250-cote//2,250+cote//2, 250+cote//2)
+
 
 racine = tk.Tk()
+canvas = tk.Canvas(racine, bg="white", width=500, height=500)
+canvas.grid(row=0, column=0)
 
-canvas = tk.Canvas(racine, width=500, height=500, bg="white")
-bouton = tk.Button(racine, text="Pause", command=pause)
+bouton = tk.Button(racine, text="Pause", command=bouton_pause)
+bouton.grid(row=1)
 
-canvas.grid(column=0, row=0)
-bouton.grid(column=0, row=1)
-
-carre = canvas.create_rectangle((coord1, coord1), (coord2, coord2), fill="red")
-
-racine.bind("<Button-1>", clic)
+carre = canvas.create_rectangle((250-cote//2, 250-cote//2),(250+cote//2, 250+cote//2), fill="red", outline="red")
+canvas.bind("<Button-1>", change_taille)
 
 racine.mainloop()
