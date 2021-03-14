@@ -15,45 +15,80 @@
 
 import tkinter as tk
 
-nb_clic = 0
-point1 = (0, 0)
-point2 = (0, 0)
-ligne1 = 0
-ligne2 = 0
+i = 1
+x = 0
+y = 0
+c = 0
+d = 0
+u = 0
+t = 0
+
+def evenments(event):
+   global i , x , y , c , d
+   if i == 1 :
+      x = event.x
+      y = event.y
+      i += 1
+
+   elif i == 2 :
+      a = event.x
+      b = event.y
+
+      canvas.create_line( (x,y) , (a,b) , fill = 'blue')
+      i += 1
+
+   elif i == 3 :
+
+      c = event.x
+      d = event.y 
+      i +=1
+
+   elif i == 4 :
+      e = event.x
+      f = event.y
+
+      canvas.create_line( (c,d) , (e,f) , fill = 'red')
+      i += 1
+
+   elif i == 5 :
+      canvas.delete('all')
+      i = 1
 
 
-def clic(event):
-    global nb_clic, point1, point2, ligne1, ligne2
-    if nb_clic == 0:
-        nb_clic = 1
-        point1 = (event.x, event.y)
-    elif nb_clic == 1:
-        nb_clic = 2
-        ligne1 = canvas.create_line(point1, (event.x, event.y), fill="blue")
-    elif nb_clic == 2:
-        nb_clic = 3
-        point2 = (event.x, event.y)
-    elif nb_clic == 3:
-        nb_clic = 4
-        ligne2 = canvas.create_line(point2, (event.x, event.y), fill="red")
-    else:
-        nb_clic = 0
-        canvas.delete(ligne1)
-        canvas.delete(ligne2)
+def changement() :
+   global u , i , t
+   print(i)
+   z = 0
+   print(t)
+
+   if u == 0 :
+      t = i
+      i = 100
+      button = tk.Button(racine, text = 'Restart' , command = changement)
+      button.grid(column=1, row=1)
+      u = 1
+      print('i',i,'t',t,'u',u)
 
 
-def pause():
-    bouton.configure(text="Restart")
+   else :
+      print(t)
+      i = t
+      print('i',i,'t',t)
+      button = tk.Button(racine, text = ' Pause ' , command = changement)
+      button.grid(column=1, row=1)
+      u = 0
+
+
+
 
 racine = tk.Tk()
 
-canvas = tk.Canvas(racine, bg="white", width=500, height=500)
-bouton = tk.Button(racine, text="Pause", command=pause)
+canvas = tk.Canvas(racine, bg = "white", width = 500 , height = 500 )
+canvas.grid(row = 0 , column = 1)
 
-canvas.grid(column=0, row=0)
-bouton.grid(column=0, row=1)
+click = canvas.bind("<Button-1>" , evenments)
 
-racine.bind("<Button-1>", clic)
-
+button = tk.Button(racine, text = 'pause' , command = changement)
+button.grid(column=1, row=1)
 
 racine.mainloop()
