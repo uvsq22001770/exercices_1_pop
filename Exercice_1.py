@@ -10,41 +10,40 @@
 
 #########################################################
 
-import tkinter as tk
+import tkinter as tk 
 
-nombre = 0
+def restart():
+    global couleur
+    couleur = 'red'
 
+def changecouleur(event) :
+    global couleur
+    x = event.x 
+    y = event.y
+    if x < 149 or y <= 200 or y >= 300 or  x > 401:
+        couleur = 'bloqué'
+    else : 
+        if couleur == 'red' :
+            couleur = 'blue'
+            rectangle = canvas.create_rectangle ( (150,200) , (400 , 300) , fill = couleur )
+        elif couleur == 'blue' :
+            couleur = 'red'
+            rectangle = canvas.create_rectangle ( (150,200) , (400 , 300) , fill = couleur )
 
-def color():
-    global nombre
-    if nombre % 2 == 0:
-        return("red")
-    elif nombre % 2 == 1:
-        return("blue")
-
-
-def clic(event):
-    global nombre
-    nombre += 1
-    if event.x > 50 and event.x < 450 and event.y > 150 and event.y < 350:
-        canvas.itemconfigure(rectangle, fill=color())
-    else:
-        racine.destroy()   
-
-def recommencer():
-    canvas.itemconfigure(rectangle, fill="red")
+couleur = "red"
 
 
-racine = tk.Tk()
+racine = tk.Tk() 
 
-canvas = tk.Canvas(racine, bg="black", width=500, height=500)
-bouton = tk.Button(racine, text="Recommencer", command=recommencer)
 
-rectangle = canvas.create_rectangle((50, 150), (450, 350), fill="red")
-
+canvas = tk.Canvas(racine, bg = "black", width = 500 , height = 500 )
 canvas.grid(column=0, row=0)
-bouton.grid(column=0, row=1)
 
-racine.bind("<Button-1>", clic)
+rectangle = canvas.create_rectangle ( (150,200) , (400 , 300) , fill = couleur )
+
+button = tk.Button(racine, text="recommencer", command = restart)
+button.grid(column=0, row=1)
+
+canvas.bind("<Button-1>" , changecouleur)
 
 racine.mainloop()
