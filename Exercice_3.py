@@ -13,54 +13,7 @@
 
 import tkinter as tk
 
-nb_croix = 0
-nb_carre = 0
-nb_cercle = 0
-
-def clic(event):
-    global nb_croix, nb_carre, nb_cercle
-    if event.x < 167 and nb_croix < 2:
-        canvas.create_rectangle((event.x - 25, event.y - 5), (event.x + 25, event.y + 5), fill="blue")
-        canvas.create_rectangle((event.x - 5, event.y - 25), (event.x + 5, event.y +  25), fill="blue")
-        nb_croix += 1
-    elif event.x > 167 and event.x < 334 and nb_carre < 3:
-        canvas.create_rectangle((event.x - 25, event.y - 25), (event.x + 25, event.y + 25), fill="green")
-        nb_carre += 1
-    elif event.x > 334 and nb_cercle < 3:
-        canvas.create_oval((event.x - 25, event.y - 25), (event.x + 25, event.y + 25), fill="red")
-        nb_cercle += 1
-
-def effacer():
-    if nb_croix>0 or nb_cercle>0 or nb_carre>0:
-        canvas.delete("all")
-        canvas.create_line((167, 0), (167, 500), fill="white")
-        canvas.create_line((334, 0), (334, 500), fill="white")
-    else:
-        pass
-
-racine = tk.Tk()
-
-canvas = tk.Canvas(racine, width=500, height=500, bg="black")
-bouton = tk.Button(racine, text="Redémarrer", command=effacer)
-
-canvas.create_line((167, 0), (167, 500), fill="white")
-canvas.create_line((334, 0), (334, 500), fill="white")
-
-canvas.grid(column=0, row=0)
-bouton.grid(column=0, row=1)
-racine.bind("<Button-1>", clic)
-
-racine.mainloop()
-
-
-
-### code Gab ###
-
-"""import tkinter as tk
-
 root = tk.Tk()
-root.title("exercice n°3")
-
 
 ### Constantes: ###
 HEIGHT = 500
@@ -109,4 +62,4 @@ canevas.bind("<Button-1>", clic)
 canevas.grid(column=0, row=0)
 bouton.grid(column=0, row=1)
 
-root.mainloop()"""
+root.mainloop()
